@@ -1,0 +1,24 @@
+commandline:
+	SprotoJump.jar --java_out=./src ./xxx.sproto
+schema:
+package com.cloudog.sprotojump
+.Person {
+    name 0 : string
+    id 1 : integer
+    email 2 : string
+
+    .PhoneNumber {
+        number 0 : string
+        type 1 : integer
+    }
+
+    phone 3 : *PhoneNumber
+}
+
+.AddressBook {
+    person 0 : *Person
+}
+generate:
+	filename->the highest level message name+.java
+	byte code->according to sproto's rules
+move to the output path and put the new file to package/filename
